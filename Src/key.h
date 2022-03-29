@@ -1,12 +1,12 @@
 #ifndef __KEY_H_
 #define __KEY_H_
 
-#include "stm32f10x_exti.h"
 #include "stm32f10x.h"
+
 
 //Òý½Å¶¨Òå
 /*PA0-->B1
-PB8-->B2
+PA8-->B2
 PB1-->B3
 PB2-->B4
 */
@@ -53,5 +53,5 @@ PB2-->B4
 
 #define KEYB4_IRQHandler            EXTI2_IRQHandler
 void EXTI_Key_Config(void);
-
+void Init_Exti(void);
 #endif
