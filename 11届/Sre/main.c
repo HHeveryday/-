@@ -9,8 +9,8 @@
 
 
 float ADCConvertedValue;
-bool Flagdisplay1 = true;//ÇĞ»»Êı¾İºÍ²ÎÊı½çÃæ
-bool Flagdisplay2 = true;//ÇĞ»»Ä£Ê½
+bool Flagdisplay1 = true;//åˆ‡æ¢æ•°æ®å’Œå‚æ•°ç•Œé¢
+bool Flagdisplay2 = true;//åˆ‡æ¢æ¨¡å¼
 uint16_t Flag5ms = 0;
 uint16_t Flag1_500us = 0;
 uint16_t Flag2_500us = 0;
@@ -25,8 +25,6 @@ int pwm_auto = 0;
 u32 TimingDelay = 0;
 
 void Delay_Ms(u32 nTime);
-
-bool t = true;
 
 
 void keyclear()
@@ -52,7 +50,7 @@ void keyclear()
 
 void Display1()
 {
-	V_data =(float) ADCConvertedValue/4096*3.3; // ¶ÁÈ¡×ª»»µÄADÖµ
+	V_data =(float) ADCConvertedValue/4096*3.3; // è¯»å–è½¬æ¢çš„ADå€¼
 	LCD_DisplayStringLine(Line1, (unsigned char *)"      Data           ");
 	if (Flagdisplay2 == true)
 	{
@@ -120,12 +118,6 @@ int main(void)
 		
 	while (1)
 	{
-		if (t == false)
-		{
-		  	GPIO_ResetBits(GPIOC,GPIO_Pin_12);
-	      GPIO_SetBits(GPIOD,GPIO_Pin_2);
-				GPIO_ResetBits(GPIOD,GPIO_Pin_2);
-		}
 		ADCConvertedValue = get_adc();
 		pwm_auto = ADCConvertedValue/3.3*100;
 		if (Flag5ms == 1)
@@ -283,7 +275,6 @@ void TIM3_IRQHandler()
 	 if (TIM_GetITStatus(TIM3, TIM_FLAG_Update) != RESET)
   {
     TIM_ClearITPendingBit(TIM3, TIM_FLAG_Update);
-		t = false;
 		if (Flagdisplay2 == true)
 		{
 			Flag1_50us++;
